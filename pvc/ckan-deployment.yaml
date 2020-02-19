@@ -1,0 +1,201 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe
+      convert -f docker-compose.yml
+    kompose.version: 1.20.0 (f3d54d784)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ckan
+  name: ckan
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe
+          convert -f docker-compose.yml
+        kompose.version: 1.20.0 (f3d54d784)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: ckan
+    spec:
+      containers:
+      - env:
+        - name: CKAN_DATAPUSHER_URL
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_DATAPUSHER_URL
+              name: ckan-env
+        - name: CKAN_DATASTORE_READ_URL
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_DATASTORE_READ_URL
+              name: ckan-env
+        - name: CKAN_DATASTORE_WRITE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_DATASTORE_WRITE_URL
+              name: ckan-env
+        - name: CKAN_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_PORT
+              name: ckan-env
+        - name: CKAN_REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_REDIS_URL
+              name: ckan-env
+        - name: CKAN_SITE_ID
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SITE_ID
+              name: ckan-env
+        - name: CKAN_SITE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SITE_URL
+              name: ckan-env
+        - name: CKAN_SMTP_MAIL_FROM
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SMTP_MAIL_FROM
+              name: ckan-env
+        - name: CKAN_SMTP_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SMTP_PASSWORD
+              name: ckan-env
+        - name: CKAN_SMTP_SERVER
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SMTP_SERVER
+              name: ckan-env
+        - name: CKAN_SMTP_STARTTLS
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SMTP_STARTTLS
+              name: ckan-env
+        - name: CKAN_SMTP_USER
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SMTP_USER
+              name: ckan-env
+        - name: CKAN_SOLR_URL
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SOLR_URL
+              name: ckan-env
+        - name: CKAN_SQLALCHEMY_URL
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SQLALCHEMY_URL
+              name: ckan-env
+        - name: CKAN_SYSADMIN_EMAIL
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SYSADMIN_EMAIL
+              name: ckan-env
+        - name: CKAN_SYSADMIN_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SYSADMIN_NAME
+              name: ckan-env
+        - name: CKAN_SYSADMIN_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN_SYSADMIN_PASSWORD
+              name: ckan-env
+        - name: CKAN__DATAPUSHER__CALLBACK_URL_BASE
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN__DATAPUSHER__CALLBACK_URL_BASE
+              name: ckan-env
+        - name: CKAN__HARVEST__MQ__HOSTNAME
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN__HARVEST__MQ__HOSTNAME
+              name: ckan-env
+        - name: CKAN__HARVEST__MQ__PORT
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN__HARVEST__MQ__PORT
+              name: ckan-env
+        - name: CKAN__HARVEST__MQ__REDIS_DB
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN__HARVEST__MQ__REDIS_DB
+              name: ckan-env
+        - name: CKAN__HARVEST__MQ__TYPE
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN__HARVEST__MQ__TYPE
+              name: ckan-env
+        - name: CKAN__PLUGINS
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN__PLUGINS
+              name: ckan-env
+        - name: CKAN__STORAGE_PATH
+          valueFrom:
+            configMapKeyRef:
+              key: CKAN__STORAGE_PATH
+              name: ckan-env
+        - name: DATASTORE_READONLY_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: DATASTORE_READONLY_PASSWORD
+              name: ckan-env
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_PASSWORD
+              name: ckan-env
+        - name: TEST_CKAN_DATASTORE_READ_URL
+          valueFrom:
+            configMapKeyRef:
+              key: TEST_CKAN_DATASTORE_READ_URL
+              name: ckan-env
+        - name: TEST_CKAN_DATASTORE_WRITE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: TEST_CKAN_DATASTORE_WRITE_URL
+              name: ckan-env
+        - name: TEST_CKAN_REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              key: TEST_CKAN_REDIS_URL
+              name: ckan-env
+        - name: TEST_CKAN_SOLR_URL
+          valueFrom:
+            configMapKeyRef:
+              key: TEST_CKAN_SOLR_URL
+              name: ckan-env
+        - name: TEST_CKAN_SQLALCHEMY_URL
+          valueFrom:
+            configMapKeyRef:
+              key: TEST_CKAN_SQLALCHEMY_URL
+              name: ckan-env
+        - name: TZ
+          valueFrom:
+            configMapKeyRef:
+              key: TZ
+              name: ckan-env
+        image: ckan
+        name: ckan
+        ports:
+        - containerPort: 5000
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/ckan
+          name: ckan-storage
+      restartPolicy: Always
+      volumes:
+      - name: ckan-storage
+        persistentVolumeClaim:
+          claimName: ckan-storage
+status: {}
