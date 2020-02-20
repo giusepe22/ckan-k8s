@@ -11,6 +11,6 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  volumeName: nfs-basedeconhecimento-kube-d-pv
+  volumeName: nfs-dadosabertos-kube-l-pv
   volumeMode: Filesystem
 status: {}
