@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -11,6 +11,9 @@ metadata:
   name: solr
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: solr
   strategy: {}
   template:
     metadata:
@@ -21,6 +24,7 @@ spec:
       creationTimestamp: null
       labels:
         io.kompose.service: solr
+        name: solr
     spec:
       containers:
       - image: giusepedias/solr62:v1.0.0
